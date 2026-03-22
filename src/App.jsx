@@ -1,11 +1,10 @@
 import './App.css'
+import Search from "./components/search"
 
 function App() {
-
-
   return (
     <>
-      <h1>hi weather</h1>
+      <Search />
     </>
   )
 }
