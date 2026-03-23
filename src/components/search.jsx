@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 
 export default function Search() {
     const [city, setCity] = useState("")
+    const [weatherData, setWeatherData] = useState({})
     const weatherApiKey = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY
 
     function inputChange(formData) {
@@ -13,7 +14,7 @@ export default function Search() {
         if (city !== "") {
             fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=metric`)
                 .then(res => res.json())
-                .then(data => console.log(`The weather in the city you searched is ${data.main.temp} celcius`))
+                .then(data => setWeatherData(data))
         }
     }, [city])
 
@@ -23,6 +24,7 @@ export default function Search() {
             <form action={inputChange}>
                 <label htmlFor="weather-input">Search a city for weather: </label>
                 <input type="search" id="city-input" name="city"></input>
+                {Object.keys(weatherData).length > 0 && <p>{weatherData.main.temp}</p>}
             </form>        
         </>
     )
