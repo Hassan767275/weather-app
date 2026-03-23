@@ -1,9 +1,16 @@
+import { useState, useEffect } from "react"
+
 export default function Search() {
+    const [city, setCity] = useState("")
 
     function inputChange(formData) {
-        const city = formData.get("city")
-        console.log(city)
+        let newCity = formData.get("city")
+        setCity(newCity)
     }
+
+    useEffect(() => {
+        console.log("new city entered")
+    }, [city])
 
     return (
         <>
