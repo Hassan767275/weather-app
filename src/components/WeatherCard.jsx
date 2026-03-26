@@ -15,10 +15,14 @@ export default function WeatherCard(props) {
 
     return (
         <div className="container">
-            <div className="weather-card">
+            <div className="top-card">
                 <div className="city">
                     <h1>{city}, {country}</h1>
                     <h2>{date}</h2>
+                </div>
+                <div className="weather">
+                    <h1>{temp}°C</h1>
+                    <h2>{tempFahrenheit.toFixed(2)}°F</h2>
                 </div>
             </div>
         </div>
