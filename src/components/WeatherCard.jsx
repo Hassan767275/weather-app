@@ -1,10 +1,11 @@
 import "./WeatherCard.css"
+import RainImage from "../assets/icon-rain.webp"
 
 export default function WeatherCard(props) {
     console.log(props.weatherData)
     const {temp, humidity} = props.weatherData.main
     const wind = props.weatherData.wind.speed
-    const weatherDescription = props.weatherData.weather[0].description
+    const weatherDescription = props.weatherData.weather[0].main
     const city = props.weatherData.name
     const country = props.weatherData.sys.country
     const tempFahrenheit = (temp * 9/5) + 32
@@ -24,6 +25,10 @@ export default function WeatherCard(props) {
                     <h1>{temp}°C</h1>
                     <h2>{tempFahrenheit.toFixed(2)}°F</h2>
                 </div>
+            </div>
+            <div className="bottom-card">
+                <img src={RainImage}></img>
+                <h1 className="weather-description">{weatherDescription}</h1>
             </div>
         </div>
     )
