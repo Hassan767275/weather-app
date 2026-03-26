@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.weather-card {
+    width: 100%;
+    max-width: 43.75rem;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.weather-card {
+    width: 100%;
+    max-width: 43.75rem;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.city {
+    background-color: #3B82F6;
+    color: white;  
+    border-radius: 16px;
+    padding: 20px 40px;
+    font-weight: 100;
+}
+
+.city h1 {
+    font-weight: 500;
+}
+
+.city h2 {
+    font-weight: 300;
+}

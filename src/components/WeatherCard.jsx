@@ -1,19 +1,25 @@
+import "./WeatherCard.css"
+
 export default function WeatherCard(props) {
     console.log(props.weatherData)
     const {temp, humidity} = props.weatherData.main
     const wind = props.weatherData.wind.speed
     const weatherDescription = props.weatherData.weather[0].description
-
+    const city = props.weatherData.name
+    const country = props.weatherData.sys.country
     const tempFahrenheit = (temp * 9/5) + 32
+    const unixDate = props.weatherData.dt
+    const dateObject = new Date(unixDate * 1000)
+    const options = { weekday: 'long', month: 'short', day: 'numeric'}
+    const date = new Intl.DateTimeFormat('en-US', options).format(dateObject)
 
     return (
-        <div>
-            <div>
-                <h2>{temp}°C</h2>
-                <h2>{tempFahrenheit.toFixed(2)}°F</h2>
-                <h2>Humidity: {humidity}%</h2>
-                <h2>Wind speed: {wind} km/h</h2>
-                <h2>Weather description: {weatherDescription}</h2>
+        <div className="container">
+            <div className="weather-card">
+                <div className="city">
+                    <h1>{city}, {country}</h1>
+                    <h2>{date}</h2>
+                </div>
             </div>
         </div>
     )
