@@ -6,4 +6,9 @@
 
 body {
     background-color: #EAF6FF;
+    font-family: "Inter"
+}
+
+input, button {
+    font-family: "Inter"
 }
