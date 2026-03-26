@@ -1,6 +1,7 @@
 import './App.css'
-import Search from "./components/search"
 import { useEffect, useState } from 'react'
+import Search from "./components/search"
+import WeatherCard from './components/WeatherCard'
 
 function App() {
   const [city, setCity] = useState("")
@@ -26,6 +27,7 @@ function App() {
         inputChange={inputChange} 
         weatherData={weatherData}
       />
+      {Object.keys(weatherData).length > 0 && <WeatherCard weatherData={weatherData}/>}
     </>
   )
 }
