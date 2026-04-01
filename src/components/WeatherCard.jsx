@@ -14,12 +14,15 @@ import drizzleImage from "../assets/cloudy (1).png"
 import smokeImage from "../assets/severe-weather.png"
 import squallImage from "../assets/weather.png"
 import thunderstormImage from "../assets/thunderstorm.png"
+import raindrop from "../assets/raindrop.png"
+import windImage from "../assets/wind (1).png"
+import thermometer from "../assets/thermometer.png"
 
 export default function WeatherCard(props) {
     const data = props.weatherData
 
     console.log(data)
-    const {temp, humidity} = data.main
+    const {temp, humidity, feels_like} = data.main
     const wind = data.wind.speed
     const weatherDescription = data.weather[0].main
     const city = data.name
@@ -61,8 +64,25 @@ export default function WeatherCard(props) {
                 </div>
             </div>
             <div className="bottom-card">
-                <img src={weatherTypes[weatherDescription]}></img>
-                <h1 className="weather-description">{weatherDescription}</h1>
+                <div className="weather-description">
+                    <img src={weatherTypes[weatherDescription]}></img>
+                    <h1 className="weather-description">{weatherDescription}</h1>
+                </div>
+                <hr className="divider"></hr>
+                <div className="weather-details-container">
+                    <div className="weather-details">
+                    <img src={raindrop}></img>
+                    <h2>Humidity: {humidity}%</h2>
+                    </div>
+                    <div className="weather-details">
+                        <img src={windImage}></img>
+                        <h2>Wind: {wind}km\h</h2>
+                    </div>
+                    <div className="weather-details">
+                        <img src={thermometer}></img>
+                        <h2>Feels like: {feels_like}°C</h2>
+                    </div>
+                </div>
             </div>
         </div>
     )
