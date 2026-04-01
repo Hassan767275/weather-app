@@ -8,6 +8,7 @@ function App() {
   const [city, setCity] = useState("")
   const [weatherData, setWeatherData] = useState({})
   const weatherApiKey = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY
+  const [fiveDayForecast, setFiveDayForecast] = useState({})
 
   function inputChange(formData) {
       let newCity = formData.get("city")
@@ -16,9 +17,15 @@ function App() {
 
   useEffect(() => {
       if (city !== "") {
-          fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=metric`)
-              .then(res => res.json())
-              .then(data => setWeatherData(data))
+        // current weather
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=metric`)
+          .then(res => res.json())
+          .then(data => setWeatherData(data))
+          
+        // 5 day forecast
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}`)
+          .then(res => res.json())
+          .then(data => setFiveDayForecast(data))
       }
   }, [city])
 
@@ -29,7 +36,7 @@ function App() {
         weatherData={weatherData}
       />
       {Object.keys(weatherData).length > 0 && <WeatherCard weatherData={weatherData}/>}
-      <FiveDayForcast />
+      {Object.keys(fiveDayForecast).length > 0 && <FiveDayForcast forecast={fiveDayForecast}/>}
     </>
   )
 }

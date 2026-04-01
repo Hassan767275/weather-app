@@ -21,7 +21,6 @@ import thermometer from "../assets/thermometer.png"
 export default function WeatherCard(props) {
     const data = props.weatherData
 
-    console.log(data)
     const {temp, humidity, feels_like} = data.main
     const wind = data.wind.speed
     const weatherDescription = data.weather[0].main
