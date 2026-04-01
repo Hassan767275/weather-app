@@ -2,6 +2,7 @@ import './App.css'
 import { useEffect, useState } from 'react'
 import Search from "./components/search"
 import WeatherCard from './components/WeatherCard'
+import FiveDayForcast from './components/FiveDayForecast'
 
 function App() {
   const [city, setCity] = useState("")
@@ -28,6 +29,7 @@ function App() {
         weatherData={weatherData}
       />
       {Object.keys(weatherData).length > 0 && <WeatherCard weatherData={weatherData}/>}
+      <FiveDayForcast />
     </>
   )
 }
