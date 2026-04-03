@@ -21,11 +21,9 @@ function App() {
         // current weather
         getCurrentWeather(weatherApiKey, city)
           .then(data => setWeatherData(data))
-        
           
         // 5 day forecast
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}`)
-          .then(res => res.json())
+        setFiveDayForecast(weatherApiKey, city)
           .then(data => setFiveDayForecast(data))
       }
   }, [city])

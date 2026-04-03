@@ -7,6 +7,9 @@ export async function getCurrentWeather(weatherApiKey, city) {
     return data
 }
 
-export function getFiveDayForecast() {
-    
+export async function getFiveDayForecast(weatherApiKey, city) {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}`)
+    const data = await res.json()
+
+    return data
 }
