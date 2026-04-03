@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Search from "./components/search"
 import WeatherCard from './components/WeatherCard'
 import FiveDayForcast from './components/FiveDayForecast'
+import { getCurrentWeather, getFiveDayForecast} from "./services/Services"
 
 function App() {
   const [city, setCity] = useState("")
@@ -18,9 +19,9 @@ function App() {
   useEffect(() => {
       if (city !== "") {
         // current weather
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=metric`)
-          .then(res => res.json())
+        getCurrentWeather(weatherApiKey, city)
           .then(data => setWeatherData(data))
+        
           
         // 5 day forecast
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}`)
