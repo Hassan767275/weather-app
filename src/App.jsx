@@ -23,7 +23,7 @@ function App() {
           .then(data => setWeatherData(data))
           
         // 5 day forecast
-        setFiveDayForecast(weatherApiKey, city)
+        getFiveDayForecast(weatherApiKey, city)
           .then(data => setFiveDayForecast(data))
       }
   }, [city])
