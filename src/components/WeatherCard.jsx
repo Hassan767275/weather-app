@@ -51,15 +51,15 @@ export default function WeatherCard(props) {
     }
 
     return (
-        <div className="container">
-            <div className="top-card">
-                <div className="city">
-                    <h1>{city}, {country}</h1>
-                    <h2>{date}</h2>
+        <div className="flex flex-col items-center">
+            <div className="flex justify-between w-full max-w-sm md:max-w-lg lg:max-w-2xl bg-[#3B82F6] text-white mt-8 rounded-2xl">
+                <div className="py-4 px-4 md:py-8 md:px-8 lg:px-16">
+                    <h1 className="text-3xl md:text-5xl font-semibold">{city}, {country}</h1>
+                    <h2 className="mt-4 text-xl md:text-3xl font-medium">{date}</h2>
                 </div>
-                <div className="weather">
-                    <h1>{temp}°C</h1>
-                    <h2>{tempFahrenheit.toFixed(2)}°F</h2>
+                <div className="mt-2 py-2 px-4 md:py-4 md:px-8 lg:px-16">
+                    <h1 className="text-4xl md:py-1 md:text-6xl  font-semibold">{temp}°C</h1>
+                    <h2 className="mt-10 md:mt-13 text-3xl md:text-4xl">{tempFahrenheit.toFixed(2)}°F</h2>
                 </div>
             </div>
             <div className="bottom-card">

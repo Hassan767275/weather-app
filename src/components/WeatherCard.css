@@ -1,10 +1,10 @@
-.container {
+/* .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
 
-.top-card {
+/* .top-card {
     width: 100%;
     max-width: 43.75rem;
     margin-top: 20px;
@@ -15,40 +15,40 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
+} */
 
-.city {
+/* .city {
     margin-top: 10px;  
     border-radius: 16px;
     padding: 20px 40px;
     font-weight: 100;
-}
+} */
 
-.city h1 {
+/* .city h1 {
     font-weight: 500;
     font-size: 2.375rem;
-}
+} */
 
-.city h2 {
+/* .city h2 {
     margin-top: 10px;
     font-weight: 300;
     font-size: 1.75rem;
-}
+} */
 
-.weather {
+/* .weather {
     margin-top: 10px;
     padding: 10px 40px;
-}
+} */
 
-.weather h1 {
+/* .weather h1 {
     font-size: 3.5rem;
     font-weight: 700;
-}
+} */
 
-.weather h2 {
+/* .weather h2 {
     font-size: 1.5rem;
     font-weight: 500;
-}
+} */
 
 .bottom-card{
     width: 100%;
