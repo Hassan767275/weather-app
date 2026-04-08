@@ -23,7 +23,7 @@ export default function WeatherCard(props) {
 
     const {temp, humidity, feels_like} = data.main
     const wind = data.wind.speed
-    const weatherDescription = data.weather[0].main
+    const { main, icon} = data.weather[0]
     const city = data.name
     const country = data.sys.country
     const tempFahrenheit = (temp * 9/5) + 32
@@ -52,7 +52,8 @@ export default function WeatherCard(props) {
 
     return (
         <div className="flex flex-col items-center px-1">
-            <div className="flex justify-between w-full max-w-sm md:max-w-lg lg:max-w-2xl bg-[#3B82F6] text-white mt-8 rounded-2xl">
+            {/* top half of card */}
+            <div className="flex justify-between w-full max-w-sm md:max-w-lg lg:max-w-2xl bg-[#3B82F6] text-white mt-8 rounded-t-2xl">
                 <div className="py-4 px-4 md:py-8 md:px-8 lg:px-16">
                     <h1 className="text-3xl md:text-5xl font-semibold">{city}, {country}</h1>
                     <h2 className="mt-4 text-xl md:text-3xl font-medium">{date}</h2>
@@ -62,23 +63,25 @@ export default function WeatherCard(props) {
                     <h2 className="mt-10 md:mt-13 text-3xl md:text-4xl">{tempFahrenheit.toFixed(2)}°F</h2>
                 </div>
             </div>
-            <div className="bottom-card">
-                <div className="weather-description">
-                    <img src={weatherTypes[weatherDescription]}></img>
-                    <h1 className="weather-description">{weatherDescription}</h1>
+
+            {/* bottom half of card */}
+            <div className="w-full max-w-sm md:max-w-lg lg:max-w-2xl bg-[#F1F5F9] text-[#60A5FA] py-1.25 px-2.5 shadow-md shadow-[#3B82F6] rounded-b-2xl">
+                <div className="flex">
+                    <img className="w-12 h-12" src={weatherTypes[main]}></img>
+                    <h1 className="ml-2 pt-3 font-bold text-lg md:pt-2 md:text-3xl">{main}</h1>
                 </div>
-                <hr className="divider"></hr>
-                <div className="weather-details-container">
-                    <div className="weather-details">
-                    <img src={raindrop}></img>
-                    <h2>Humidity: {humidity}%</h2>
+                <hr className="my-2 bg-color-[#60A5FA] border-t-2"></hr>
+                <div className="flex flex-col gap-2 md:flex-row md:justify-between">
+                    <div className="flex items-center gap-2">
+                        <img className="w-12 h-12" src={raindrop}></img>
+                        <h2>Humidity: {humidity}%</h2>
                     </div>
-                    <div className="weather-details">
-                        <img src={windImage}></img>
+                    <div className="flex items-center gap-2">
+                        <img className="w-12 h-12" src={windImage}></img>
                         <h2>Wind: {wind}km\h</h2>
                     </div>
-                    <div className="weather-details">
-                        <img src={thermometer}></img>
+                    <div className="flex items-center gap-2">
+                        <img className="w-12 h-12" src={thermometer}></img>
                         <h2>Feels like: {feels_like}°C</h2>
                     </div>
                 </div>
