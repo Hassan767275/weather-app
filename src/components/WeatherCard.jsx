@@ -20,10 +20,11 @@ import thermometer from "../assets/thermometer.png"
 
 export default function WeatherCard(props) {
     const data = props.weatherData
+    console.log(data)
 
     const {temp, humidity, feels_like} = data.main
     const wind = data.wind.speed
-    const { main, icon} = data.weather[0]
+    const { main, icon, description} = data.weather[0]
     const city = data.name
     const country = data.sys.country
     const tempFahrenheit = (temp * 9/5) + 32
@@ -53,14 +54,14 @@ export default function WeatherCard(props) {
     return (
         <div className="flex flex-col items-center px-1">
             {/* top half of card */}
-            <div className="flex justify-between w-full max-w-sm md:max-w-lg lg:max-w-2xl bg-[#3B82F6] text-white mt-8 rounded-t-2xl">
-                <div className="py-4 px-4 md:py-8 md:px-8 lg:px-16">
-                    <h1 className="text-3xl md:text-5xl font-semibold">{city}, {country}</h1>
-                    <h2 className="mt-4 text-xl md:text-3xl font-medium">{date}</h2>
+            <div className="flex w-full max-w-sm md:max-w-lg lg:max-w-2xl bg-[#3B82F6] text-white mt-8 rounded-t-2xl">
+                <div className="py-4 px-4 md:py-8 md:px-8 lg:px-16 flex flex-col justify-center gap-2">
+                    <h1 className="text-4xl md:text-6xl font-semibold">{city}, {country}</h1>
+                    <h2 className="text-xl md:text-3xl font-medium">{date}</h2>
                 </div>
-                <div className="mt-2 py-2 px-4 md:py-4 md:px-8 lg:px-16">
-                    <h1 className="text-4xl md:py-1 md:text-6xl  font-semibold">{temp}°C</h1>
-                    <h2 className="mt-10 md:mt-13 text-3xl md:text-4xl">{tempFahrenheit.toFixed(2)}°F</h2>
+                <div className="mt-2 py-2 px-4 md:py-4 md:px-8 lg:px-16 flex flex-col justify-center">
+                    <h1 className="text-4xl md:py-1 md:text-6xl font-semibold">{temp}°C</h1>
+                    <h2 className="text-xl md:text-4xl">{description}</h2>
                 </div>
             </div>
 

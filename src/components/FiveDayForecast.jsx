@@ -2,7 +2,7 @@ import "./FiveDayForecast.css"
 
 export default function FiveDayForcase(props) {
     const fiveDayForecast = props.forecast.list
-    console.log(fiveDayForecast)
+    // console.log(fiveDayForecast)
     const forecastObject = {}
 
     for (let i = 0; i < fiveDayForecast.length; i++) {
@@ -16,7 +16,7 @@ export default function FiveDayForcase(props) {
         }
         forecastObject[date].push(temp_max, temp_main)
     }
-    console.log(forecastObject)
+    // console.log(forecastObject)
 
 
     return (
