@@ -2,7 +2,7 @@ import "./search.css"
 
 export default function Search(props) {
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center px-1">
             <h1 
                 className="mt-20 text-4xl text-[#0EA5E9] font-bold">
                     How's the sky looking today?
@@ -15,7 +15,7 @@ export default function Search(props) {
                     placeholder="Search a city for weather">
                 </input>
                 <button 
-                    className="bg-[#0EA5E9] py-1 px-3 text-white rounded-lg" 
+                    className="bg-[#0EA5E9] py-1 px-2 text-white rounded-lg" 
                     type="submit">
                         Search
                 </button>

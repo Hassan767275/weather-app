@@ -51,7 +51,7 @@ export default function WeatherCard(props) {
     }
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center px-1">
             <div className="flex justify-between w-full max-w-sm md:max-w-lg lg:max-w-2xl bg-[#3B82F6] text-white mt-8 rounded-2xl">
                 <div className="py-4 px-4 md:py-8 md:px-8 lg:px-16">
                     <h1 className="text-3xl md:text-5xl font-semibold">{city}, {country}</h1>
