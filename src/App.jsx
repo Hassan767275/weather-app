@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import Search from "./components/search"
 import WeatherCard from './components/WeatherCard'
 import FiveDayForcast from './components/FiveDayForecast'
-import { getCurrentWeather, getFiveDayForecast} from "./services/Services"
+import { getCurrentWeather, getFiveDayForecast, getHighsAndLows} from "./services/Services"
 
 function App() {
   const [city, setCity] = useState("")
@@ -24,7 +24,10 @@ function App() {
           
         // 5 day forecast
         getFiveDayForecast(weatherApiKey, city)
-          .then(data => setFiveDayForecast(data))
+          .then(data => {
+            setFiveDayForecast(data)
+            getHighsAndLows(data)
+          })
       }
   }, [city])
 
