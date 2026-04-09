@@ -6,7 +6,7 @@ export async function getCurrentWeather(weatherApiKey, city) {
 }
 
 export async function getFiveDayForecast(weatherApiKey, city) {
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}`)
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=metric`)
     const data = await res.json()
 
     return data
@@ -26,5 +26,14 @@ export function getHighsAndLows(data) {
         }
         forecastObject[date].push(temp_max, temp_min)
     }
-    console.log(forecastObject)
+
+    for (const[date, temps] of Object.entries(forecastObject)) {
+        const maxTemp = Math.max(...temps)
+        const minTemp = Math.min(...temps)
+        forecastObject[date] = {
+            maxTemp,
+            minTemp
+        }
+    }
+    return forecastObject
 }
