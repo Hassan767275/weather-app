@@ -1,11 +1,10 @@
 import "./FiveDayForecast.css"
 
-export default function FiveDayForcase(props) {
-    const fiveDayForecast = props.forecast.list
-
+export default function FiveDayForcast({ day, maxTemp, minTemp}) {
+    
     return (
         <div className="five-day-container">
-            <h1 className="five-title">5 Day Forecast</h1>
+            <h1>{day} {maxTemp} {minTemp}</h1>
         </div>
     )
 }

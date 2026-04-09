@@ -9,7 +9,7 @@ function App() {
   const [city, setCity] = useState("")
   const [weatherData, setWeatherData] = useState({})
   const weatherApiKey = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY
-  const [fiveDayForecast, setFiveDayForecast] = useState({})
+  const [dailyForecast, setDailyForecast] = useState({})
 
   function inputChange(formData) {
       let newCity = formData.get("city")
@@ -25,12 +25,11 @@ function App() {
         // 5 day forecast
         getFiveDayForecast(weatherApiKey, city)
           .then(data => {
-            setFiveDayForecast(data)
-            getHighsAndLows(data)
+            setDailyForecast(getHighsAndLows(data))
           })
       }
   }, [city])
-
+  
   return (
     <>
       <Search 
@@ -38,7 +37,14 @@ function App() {
         weatherData={weatherData}
       />
       {Object.keys(weatherData).length > 0 && <WeatherCard weatherData={weatherData}/>}
-      {Object.keys(fiveDayForecast).length > 0 && <FiveDayForcast forecast={fiveDayForecast}/>}
+      {Object.keys(dailyForecast).length > 0 && (
+        <>
+          <h1 className="text-center mt-2 text-[#3B82F6]">6 Day Forecast</h1>
+          {Object.entries(dailyForecast).map(([day, {maxTemp, minTemp}]) => (
+            <FiveDayForcast day={day} maxTemp={maxTemp} minTemp={minTemp}/>
+          ))}
+        </>
+      )}
     </>
   )
 }
