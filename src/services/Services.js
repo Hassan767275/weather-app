@@ -14,6 +14,7 @@ export async function getFiveDayForecast(weatherApiKey, city) {
 
 export function getHighsAndLows(data) {
     const fiveDayForecast = data.list
+    console.log(fiveDayForecast)
     const forecastObject = {}
     for (let i = 0; i < fiveDayForecast.length; i++) {
         const dateObject = new Date(fiveDayForecast[i].dt * 1000)
