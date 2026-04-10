@@ -2,7 +2,7 @@ import './App.css'
 import { useEffect, useState } from 'react'
 import Search from "./components/search"
 import WeatherCard from './components/WeatherCard'
-import FiveDayForcast from './components/FiveDayForecast'
+import SixDayForecast from './components/SixDayForecast'
 import { getCurrentWeather, getFiveDayForecast, getHighsAndLows} from "./services/Services"
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
         <>
           <h1 className="text-center mt-2 text-[#3B82F6]">6 Day Forecast</h1>
           {Object.entries(dailyForecast).map(([day, {maxTemp, minTemp}]) => (
-            <FiveDayForcast day={day} maxTemp={maxTemp} minTemp={minTemp}/>
+            <SixDayForecast key={day} day={day} maxTemp={maxTemp} minTemp={minTemp}/>
           ))}
         </>
       )}
