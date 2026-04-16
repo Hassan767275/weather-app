@@ -6,7 +6,9 @@ import SixDayForecast from './components/SixDayForecast'
 import { getCurrentWeather, getFiveDayForecast, getHighsAndLows} from "./services/Services"
 
 function App() {
-  const [city, setCity] = useState("")
+  const [city, setCity] = useState(() => {
+    return localStorage.getItem("city") || ""
+  })
   const [weatherData, setWeatherData] = useState({})
   const weatherApiKey = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY
   const [dailyForecast, setDailyForecast] = useState({})
@@ -14,6 +16,7 @@ function App() {
   function inputChange(formData) {
       let newCity = formData.get("city")
       setCity(newCity)
+      localStorage.setItem("city", newCity)
   }
 
   useEffect(() => {
