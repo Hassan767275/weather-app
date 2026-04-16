@@ -40,9 +40,7 @@ function App() {
       {Object.keys(dailyForecast).length > 0 && (
         <>
           <h1 className="text-center mt-2 text-[#3B82F6]">6 Day Forecast</h1>
-          {Object.entries(dailyForecast).map(([day, {maxTemp, minTemp, description}]) => (
-            <SixDayForecast key={day} day={day} maxTemp={maxTemp} minTemp={minTemp} description={description}/>
-          ))}
+          <SixDayForecast dailyForecast={dailyForecast}/>
         </>
       )}
     </>
