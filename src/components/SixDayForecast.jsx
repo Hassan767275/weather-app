@@ -3,7 +3,7 @@ import {weatherTypes} from "../weatherIcons/weatherIcons.js"
 export default function FiveDayForcast({ day, maxTemp, minTemp, description}) {
     
     return (
-        <div className="five-day-container">
+        <div className="flex flex-col items-center">
             <h1>{day}</h1>
             <img className="w-16 h-16" src={weatherTypes[description]}></img>
             <div>
