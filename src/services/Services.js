@@ -18,7 +18,7 @@ export function getHighsAndLows(data) {
 
     for (let i = 0; i < fiveDayForecast.length; i++) {
         const dateObject = new Date(fiveDayForecast[i].dt * 1000)
-        const options = { weekday: 'short'}
+        const options = { weekday: 'long'}
         const date = new Intl.DateTimeFormat('en-US', options).format(dateObject)
         const {temp_max, temp_min} = fiveDayForecast[i].main
         const description = fiveDayForecast[i].weather[0].main
