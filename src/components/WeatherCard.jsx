@@ -6,6 +6,7 @@ import thermometer from "../assets/thermometer.png"
 
 export default function WeatherCard(props) {
     const data = props.weatherData
+    if (data.cod === "404") return null
 
     const {temp, humidity, feels_like} = data.main
     const wind = data.wind.speed
