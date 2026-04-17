@@ -42,6 +42,5 @@ export function getHighsAndLows(data) {
             description: data.description
         }
     }
-    console.log(forecastObject)
     return forecastObject
 }

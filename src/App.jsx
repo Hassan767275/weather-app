@@ -31,6 +31,8 @@ function App() {
             setDailyForecast(getHighsAndLows(data))
           })
       }
+      
+      
   }, [city])
   
   return (
@@ -42,7 +44,7 @@ function App() {
       {Object.keys(weatherData).length > 0 && <WeatherCard weatherData={weatherData}/>}
       {Object.keys(dailyForecast).length > 0 && (
         <>
-          <h1 className="text-center mt-2 text-[#3B82F6] md:text-xl lg:text-2xl">6 Day Forecast</h1>
+          <h1 className="text-center my-1 text-[#3B82F6] md:text-xl lg:text-2xl">6 Day Forecast</h1>
           <SixDayForecast dailyForecast={dailyForecast}/>
         </>
       )}
