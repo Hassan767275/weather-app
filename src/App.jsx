@@ -8,6 +8,7 @@ import {
   getFiveDayForecast,
   getHighsAndLows,
 } from "./services/Services";
+import { RotatingLines } from "react-loader-spinner";
 
 function App() {
   const [city, setCity] = useState(() => {
@@ -17,6 +18,7 @@ function App() {
   const weatherApiKey = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY;
   const [dailyForecast, setDailyForecast] = useState({});
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function inputChange(formData) {
     let newCity = formData.get("city");
@@ -24,48 +26,60 @@ function App() {
     localStorage.setItem("city", newCity);
   }
 
-  useEffect(() => {
-    if (city !== "") {
-      setWeatherData({})
-      setDailyForecast({})
-      setError("");
-
+  async function getWeatherData() {
+    try {
       // current weather
-      getCurrentWeather(weatherApiKey, city)
-        .then((data) => {
-          setWeatherData(data);
-        })
-        .catch((error) => setError("Please choose a valid city"));
+      const currentWeather = await getCurrentWeather(weatherApiKey, city);
+      setWeatherData(currentWeather);
 
       // 5 day forecast
-      getFiveDayForecast(weatherApiKey, city)
-        .then((data) => {
-          setDailyForecast(getHighsAndLows(data));
-        })
-        .catch((error) => setError("Please choose a valid city"));
+      const sixDayForecast = await getFiveDayForecast(weatherApiKey, city);
+      setDailyForecast(getHighsAndLows(sixDayForecast));
+    } catch (err) {
+      setError("Please choose a correct city");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (city !== "") {
+      setWeatherData({});
+      setDailyForecast({});
+      setError("");
+
+      setIsLoading(true);
+      getWeatherData();
     }
   }, [city]);
 
   return (
     <>
-      <Search 
-        inputChange={inputChange} 
-        error={error}
-      />
-      {error.length === 0 && 
-      <>
-        {weatherData.main && (
-          <WeatherCard weatherData={weatherData} />
-        )}
-        {Object.keys(dailyForecast).length > 0 && (
-          <>
-            <h1 className="text-center my-1 text-[#3B82F6] md:text-xl lg:text-2xl">
-              6 Day Forecast
-            </h1>
-            <SixDayForecast dailyForecast={dailyForecast} />
-          </>
-        )}
-      </>}
+      <Search inputChange={inputChange} error={error} />
+      {isLoading && (
+        <div className="flex justify-center">
+          <RotatingLines
+          strokeColor="#3B82F6"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="96"
+          visible={true}
+        />
+        </div>
+      )}
+      {error.length === 0 && (
+        <>
+          {weatherData.main && <WeatherCard weatherData={weatherData} />}
+          {Object.keys(dailyForecast).length > 0 && (
+            <>
+              <h1 className="text-center my-1 text-[#3B82F6] md:text-xl lg:text-2xl">
+                6 Day Forecast
+              </h1>
+              <SixDayForecast dailyForecast={dailyForecast} />
+            </>
+          )}
+        </>
+      )}
     </>
   );
 }
