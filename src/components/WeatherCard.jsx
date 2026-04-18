@@ -4,20 +4,28 @@ import raindrop from "../assets/raindrop.png"
 import windImage from "../assets/wind (1).png"
 import thermometer from "../assets/thermometer.png"
 
-export default function WeatherCard(props) {
-    const data = props.weatherData
+export default function WeatherCard({ weatherData, unit}) {
+    const data = weatherData
     if (data.cod === "404") return null
 
-    const {temp, humidity, feels_like} = data.main
-    const wind = data.wind.speed
+    const {temp: tempCelsius, humidity, feels_like: feelsLikeCelsius} = data.main
+    const windKm = (data.wind.speed * 3.6).toFixed(0)
+    const windMi = (data.wind.speed * 2.237).toFixed(0)
     const { main, description} = data.weather[0]
     const city = data.name
     const country = data.sys.country
-    const tempFahrenheit = (temp * 9/5) + 32
+    const tempFahrenheit = ((tempCelsius * 9/5) + 32).toFixed(2)
+    const feelsLikeFarenheit = ((feelsLikeCelsius * 9/5) + 32).toFixed(2)
     const unixDate = data.dt
     const dateObject = new Date(unixDate * 1000)
     const options = { weekday: 'long', month: 'short', day: 'numeric'}
     const date = new Intl.DateTimeFormat('en-US', options).format(dateObject)
+
+    const temperature = unit === "metric" ? tempCelsius : tempFahrenheit
+    const tempSymbol = unit === "metric" ? "°C" : "°F"
+    const windSpeed = unit === "metric" ? windKm : windMi
+    const windSymbol = unit === "metric" ? "km/h" : "mph"
+    const feelsLike = unit === "metric" ? feelsLikeCelsius: feelsLikeFarenheit
 
     return (
         <div className="flex flex-col items-center px-1">
@@ -28,7 +36,7 @@ export default function WeatherCard(props) {
                     <h2 className="text-xl md:text-3xl font-medium">{date}</h2>
                 </div>
                 <div className="mt-2 py-2 px-4 md:py-4 md:px-8 lg:px-16 flex flex-col justify-center">
-                    <h1 className="text-4xl md:py-1 md:text-6xl font-semibold">{temp}°C</h1>
+                    <h1 className="text-4xl md:py-1 md:text-6xl font-semibold">{temperature}{tempSymbol}</h1>
                     <h2 className="text-xl md:text-4xl">{description}</h2>
                 </div>
             </div>
@@ -47,11 +55,11 @@ export default function WeatherCard(props) {
                     </div>
                     <div className="flex items-center gap-2">
                         <img className="w-12 h-12" src={windImage}></img>
-                        <h2>Wind: {wind}km\h</h2>
+                        <h2>Wind: {windSpeed}{windSymbol}</h2>
                     </div>
                     <div className="flex items-center gap-2">
                         <img className="w-12 h-12" src={thermometer}></img>
-                        <h2>Feels like: {feels_like}°C</h2>
+                        <h2>Feels like: {feelsLike}{tempSymbol}</h2>
                     </div>
                 </div>
             </div>

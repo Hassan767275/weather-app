@@ -20,11 +20,16 @@ function App() {
   const [dailyForecast, setDailyForecast] = useState({});
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [unit, setUnit] = useState("metric")
 
   function inputChange(formData) {
     let newCity = formData.get("city");
     setCity(newCity);
     localStorage.setItem("city", newCity);
+  }
+
+  function toggleUnit() {
+    setUnit(prevUnit => (prevUnit === "metric" ? "imperial" : "metric"))
   }
 
   async function getWeatherData() {
@@ -56,7 +61,7 @@ function App() {
 
   return (
     <>
-      <Header/>
+      <Header unit={unit} toggleUnit={toggleUnit}/>
       <Search inputChange={inputChange} error={error} />
       {isLoading && (
         <div className="flex justify-center">
@@ -71,7 +76,7 @@ function App() {
       )}
       {error.length === 0 && (
         <>
-          {weatherData.main && <WeatherCard weatherData={weatherData} />}
+          {weatherData.main && <WeatherCard weatherData={weatherData} unit={unit}/>}
           {Object.keys(dailyForecast).length > 0 && (
             <>
               <h1 className="text-center my-1 text-[#3B82F6] md:text-xl lg:text-2xl">

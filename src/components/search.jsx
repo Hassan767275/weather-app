@@ -13,7 +13,7 @@ export default function Search({ inputChange, error }) {
         <input
           type="search"
           className={
-            `flex-1 mr-2 bg-[#FFFFFF] border-2 rounded-xl p-1 
+            `flex-1 mr-2 bg-[#FFFFFF] border-2 rounded-xl p-1
             ${error ? `border-red-900 placeholder-red-900` : `border-[#BAE6FD]`}`}
           name="city"
           placeholder={
@@ -23,7 +23,7 @@ export default function Search({ inputChange, error }) {
           }
         ></input>
         <button
-          className="bg-[#0EA5E9] py-1 px-2 text-white rounded-lg"
+          className="bg-[#0EA5E9] py-1 px-2 text-white rounded-lg cursor-pointer"
           type="submit"
         >
           Search
