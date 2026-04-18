@@ -9,6 +9,7 @@ import {
   getHighsAndLows,
 } from "./services/Services";
 import { RotatingLines } from "react-loader-spinner";
+import Header from "./components/Header.jsx"
 
 function App() {
   const [city, setCity] = useState(() => {
@@ -55,6 +56,7 @@ function App() {
 
   return (
     <>
+      <Header/>
       <Search inputChange={inputChange} error={error} />
       {isLoading && (
         <div className="flex justify-center">
