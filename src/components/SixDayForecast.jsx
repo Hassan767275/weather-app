@@ -1,7 +1,12 @@
 import { weatherTypes } from "../weatherIcons/weatherIcons.js";
 
-export default function SixDayForcast({ dailyForecast }) {
+export default function SixDayForcast({ dailyForecast, unit }) {
   if (!dailyForecast) return null;
+  const tempSymbol = unit === "metric" ? "°C" : "°F"
+
+  function getTemp(temp) {
+    return unit === "metric" ? temp : ((temp * 9/5) + 32).toFixed(2)
+  }
 
   return (
     <div className="flex justify-center mb-16">
@@ -12,8 +17,8 @@ export default function SixDayForcast({ dailyForecast }) {
                 <h1 className="text-2xl text-[#3B82F6] font-bold pt-2">{day}</h1>
                 <img className="w-16 h-16 p-2" src={weatherTypes[description]}></img>
                 <div className="flex flex-col items-center pb-2 text-[#3B82F6] font-semibold">
-                <h1>H: {maxTemp}°C</h1>
-                <h1>L: {minTemp}°C</h1>
+                <h1>H: {getTemp(maxTemp)}{tempSymbol}</h1>
+                <h1>L: {getTemp(minTemp)}{tempSymbol}</h1>
                 </div>
             </div>
             ),

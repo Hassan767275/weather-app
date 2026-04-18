@@ -82,7 +82,7 @@ function App() {
               <h1 className="text-center my-1 text-[#3B82F6] md:text-xl lg:text-2xl">
                 6 Day Forecast
               </h1>
-              <SixDayForecast dailyForecast={dailyForecast} />
+              <SixDayForecast dailyForecast={dailyForecast} unit={unit}/>
             </>
           )}
         </>
