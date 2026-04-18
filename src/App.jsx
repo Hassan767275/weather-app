@@ -21,6 +21,11 @@ function App() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [unit, setUnit] = useState("metric")
+  const [theme, setTheme] = useState("light")
+
+  function toggleTheme() {
+    setTheme(prevMode => (prevMode === "light" ? "dark" : "light"))
+  }
 
   function inputChange(formData) {
     let newCity = formData.get("city");
@@ -61,7 +66,7 @@ function App() {
 
   return (
     <>
-      <Header unit={unit} toggleUnit={toggleUnit}/>
+      <Header unit={unit} toggleUnit={toggleUnit} theme={theme} toggleTheme={toggleTheme}/>
       <Search inputChange={inputChange} error={error} />
       {isLoading && (
         <div className="flex justify-center">
