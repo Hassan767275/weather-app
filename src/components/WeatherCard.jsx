@@ -8,6 +8,7 @@ export default function WeatherCard({ weatherData, unit}) {
     const data = weatherData
     if (data.cod === "404") return null
 
+    const isMetric = unit === "metric"
     const {temp: tempCelsius, humidity, feels_like: feelsLikeCelsius} = data.main
     const windKm = (data.wind.speed * 3.6).toFixed(0)
     const windMi = (data.wind.speed * 2.237).toFixed(0)
@@ -15,17 +16,17 @@ export default function WeatherCard({ weatherData, unit}) {
     const city = data.name
     const country = data.sys.country
     const tempFahrenheit = ((tempCelsius * 9/5) + 32).toFixed(2)
-    const feelsLikeFarenheit = ((feelsLikeCelsius * 9/5) + 32).toFixed(2)
+    const feelsLikeFahrenheit = ((feelsLikeCelsius * 9/5) + 32).toFixed(2)
     const unixDate = data.dt
     const dateObject = new Date(unixDate * 1000)
     const options = { weekday: 'long', month: 'short', day: 'numeric'}
     const date = new Intl.DateTimeFormat('en-US', options).format(dateObject)
 
-    const temperature = unit === "metric" ? tempCelsius : tempFahrenheit
-    const tempSymbol = unit === "metric" ? "°C" : "°F"
-    const windSpeed = unit === "metric" ? windKm : windMi
-    const windSymbol = unit === "metric" ? "km/h" : "mph"
-    const feelsLike = unit === "metric" ? feelsLikeCelsius: feelsLikeFarenheit
+    const temperature = isMetric ? tempCelsius : tempFahrenheit
+    const tempSymbol = isMetric ? "°C" : "°F"
+    const windSpeed = isMetric ? windKm : windMi
+    const windSymbol = isMetric ? "km/h" : "mph"
+    const feelsLike = isMetric ? feelsLikeCelsius: feelsLikeFahrenheit
 
     return (
         <div className="flex flex-col items-center px-1">
