@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, createContext } from "react";
 import Search from "./components/search";
 import WeatherCard from "./components/WeatherCard";
 import SixDayForecast from "./components/SixDayForecast";
@@ -9,7 +9,9 @@ import {
   getHighsAndLows,
 } from "./services/Services";
 import { RotatingLines } from "react-loader-spinner";
-import Header from "./components/Header.jsx"
+import Header from "./components/Header.jsx";
+
+export const ThemeContext = createContext();
 
 function App() {
   const [city, setCity] = useState(() => {
@@ -20,11 +22,11 @@ function App() {
   const [dailyForecast, setDailyForecast] = useState({});
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [unit, setUnit] = useState("metric")
-  const [theme, setTheme] = useState("light")
+  const [unit, setUnit] = useState("metric");
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   function toggleTheme() {
-    setTheme(prevMode => (prevMode === "light" ? "dark" : "light"))
+    setIsDarkMode((prevMode) => !prevMode);
   }
 
   function inputChange(formData) {
@@ -34,7 +36,7 @@ function App() {
   }
 
   function toggleUnit() {
-    setUnit(prevUnit => (prevUnit === "metric" ? "imperial" : "metric"))
+    setUnit((prevUnit) => (prevUnit === "metric" ? "imperial" : "metric"));
   }
 
   async function getWeatherData() {
@@ -65,34 +67,43 @@ function App() {
   }, [city]);
 
   return (
-    <>
-      <Header unit={unit} toggleUnit={toggleUnit} theme={theme} toggleTheme={toggleTheme}/>
-      <Search inputChange={inputChange} error={error} />
-      {isLoading && (
-        <div className="flex justify-center">
-          <RotatingLines
-          strokeColor="#3B82F6"
-          strokeWidth="5"
-          animationDuration="0.75"
-          width="96"
-          visible={true}
+    <ThemeContext.Provider value={isDarkMode}>
+      <div className={`${isDarkMode ? "bg-[#EAF6FF]" : "bg-[#0f172a]"}`}>
+        <Header
+          unit={unit}
+          toggleUnit={toggleUnit}
+          theme={isDarkMode}
+          toggleTheme={toggleTheme}
         />
-        </div>
-      )}
-      {error.length === 0 && (
-        <>
-          {weatherData.main && <WeatherCard weatherData={weatherData} unit={unit}/>}
-          {Object.keys(dailyForecast).length > 0 && (
-            <>
-              <h1 className="text-center my-1 text-[#3B82F6] md:text-xl lg:text-2xl">
-                6 Day Forecast
-              </h1>
-              <SixDayForecast dailyForecast={dailyForecast} unit={unit}/>
-            </>
-          )}
-        </>
-      )}
-    </>
+        <Search inputChange={inputChange} error={error} />
+        {isLoading && (
+          <div className="flex justify-center">
+            <RotatingLines
+              strokeColor="#3B82F6"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="96"
+              visible={true}
+            />
+          </div>
+        )}
+        {error.length === 0 && (
+          <>
+            {weatherData.main && (
+              <WeatherCard weatherData={weatherData} unit={unit} />
+            )}
+            {Object.keys(dailyForecast).length > 0 && (
+              <>
+                <h1 className="text-center my-1 text-[#3B82F6] md:text-xl lg:text-2xl">
+                  6 Day Forecast
+                </h1>
+                <SixDayForecast dailyForecast={dailyForecast} unit={unit} />
+              </>
+            )}
+          </>
+        )}
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
